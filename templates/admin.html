@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block body %}<h1>Tổng quan</h1>{% include "admin_nav.html" %}
+<div class="stats"><div class="card"><b>{{ stats.orders }}</b><br>đơn</div><div class="card"><b>{{ stats.pending }}</b><br>chờ thanh toán</div>
+<div class="card"><b>{{ stats.revenue|vnd }}</b><br>doanh thu (đã thu)</div></div>
+<h2>🔔 Thông báo</h2>
+{% for a in alerts %}<div class="alert">⚠️ <b>{{ a.pname }}</b> sau 7 ngày chỉ bán được <b>1</b> chiếc.<br>
+Khách mua: <b>{{ a.buyer_name }}</b> – SĐT {{ a.buyer_phone }}{% if a.ship_phone!=a.buyer_phone %} (người nhận: {{ a.ship_name }} – {{ a.ship_phone }}){% endif %} – đơn {{ a.code }}
+<form method="post" action="{{ url_for('alert_dismiss') }}" style="display:inline"><input type="hidden" name="pid" value="{{ a.pid }}"><input type="hidden" name="oid" value="{{ a.oid }}">
+<button class="btn small alt">Đã nhắn khách</button></form></div>
+{% else %}<p>Không có thông báo mới 🌸</p>{% endfor %}{% endblock %}

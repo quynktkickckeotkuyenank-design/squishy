@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block body %}
+<h1>Squishy đáng yêu ✨</h1>
+<p><a class="btn small {{ '' if not t else 'alt' }}" href="{{ url_for('index') }}">Tất cả</a>
+<a class="btn small {{ '' if t=='instock' else 'alt' }}" href="{{ url_for('index', type='instock') }}">Có sẵn</a>
+<a class="btn small {{ '' if t=='preorder' else 'alt' }}" href="{{ url_for('index', type='preorder') }}">Pre-order</a></p>
+<div class="grid">{% for p in products %}
+<a class="card" style="text-decoration:none;color:inherit" href="{{ url_for('product', pid=p.id) }}">
+{% if p.image %}<img src="{{ url_for('uploaded', name=p.image) }}" alt="">{% else %}<div class="thumb"></div>{% endif %}
+<h3 style="margin:8px 0 2px">{{ p.name }}</h3><div class="price">{{ p.price|vnd }}</div>
+{% if p.type=='instock' %}<span class="badge ok">Có sẵn ({{ p.stock }})</span>{% else %}<span class="badge">Pre-order</span>{% endif %}</a>
+{% else %}<p>Chưa có sản phẩm nào.</p>{% endfor %}</div>{% endblock %}

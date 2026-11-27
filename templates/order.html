@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block body %}
+<h1>Đơn {{ o.code }} <span class="badge">{{ STATUSES[o.status] }}</span></h1>
+<div class="two"><div>
+<table><tr><th>Sản phẩm</th><th>SL</th><th>Tiền</th></tr>
+{% for i in items %}<tr><td>{{ i.name }}</td><td>{{ i.qty }}</td><td>{{ (i.qty*i.unit_price)|vnd }}</td></tr>{% endfor %}
+<tr><th colspan="2">Tổng cần chuyển</th><th>{{ o.total|vnd }}</th></tr></table>
+<div class="card" style="margin-top:16px"><h3>📦 Thông tin nhận hàng</h3>
+{% if not o.ship_address %}<p class="flash">Bạn chưa nhập địa chỉ nhận hàng, điền bên dưới nha!</p>{% endif %}
+<form method="post" action="{{ url_for('order_ship', code=o.code) }}">
+<label>Tên người nhận</label><input name="ship_name" value="{{ o.ship_name }}" required>
+<label>SĐT người nhận</label><input name="ship_phone" value="{{ o.ship_phone }}" required inputmode="tel">
+<label>Địa chỉ mới</label><textarea name="ship_address" rows="3" required>{{ o.ship_address }}</textarea>
+<p><button class="btn">Lưu thông tin</button></p></form></div></div>
+<div class="card qrbox"><h3>Quét mã để chuyển khoản</h3>
+{% if o.status=='pending' %}<img src="{{ url_for('qr', code=o.code) }}" alt="QR VietQR">
+<p><b>{{ o.total|vnd }}</b> – đã gắn sẵn số tiền & nội dung <b>{{ o.code }}</b></p>{% else %}<p>Đơn đã được xác nhận thanh toán 💚</p>{% endif %}
+<p style="font-size:.9rem">{{ BANK_OWNER }}<br>{{ BANK_ACCOUNT }} – {{ BANK_NAME }}<br>Nội dung CK: <b>{{ o.code }}</b></p>
+<p style="font-size:.8rem">Lưu lại mã đơn <b>{{ o.code }}</b> để tra cứu. Shop sẽ xác nhận khi nhận được tiền.</p></div></div>{% endblock %}

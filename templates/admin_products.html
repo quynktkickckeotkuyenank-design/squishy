@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block body %}<h1>Sản phẩm</h1>{% include "admin_nav.html" %}
+<p><a class="btn" href="{{ url_for('admin_product') }}">+ Thêm sản phẩm</a></p>
+<table><tr><th>Tên</th><th>SKU</th><th>Giá ¥</th><th>Cân</th><th>Tiền cân</th><th>Giá bán</th><th>Loại/Kho</th><th></th></tr>
+{% for p in products %}<tr style="{{ 'opacity:.5' if not p.active }}"><td>{{ p.name }}</td><td>{{ p.sku }}</td><td>{{ p.cny }}</td><td>{{ p.weight }}kg</td>
+<td>{{ p.surcharge|vnd }}</td><td>{{ p.price|vnd }}</td><td>{{ 'Có sẵn' if p.type=='instock' else 'Pre-order' }} / {{ p.stock }}</td>
+<td><a href="{{ url_for('admin_product', pid=p.id) }}">Sửa</a></td></tr>{% endfor %}</table>{% endblock %}

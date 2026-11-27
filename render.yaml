@@ -1,0 +1,21 @@
+# Deploy lên Render (cần gói Starter ~7$/tháng vì có ổ đĩa lưu dữ liệu)
+services:
+  - type: web
+    name: squishy-dream-shop
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 2
+    disk:
+      name: shop-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PRODUCTION
+        value: "1"
+      - key: DATA_DIR
+        value: /var/data
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_PASSWORD
+        sync: false   # tự nhập trên Render dashboard

@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block body %}<h1>Đơn hàng</h1>{% include "admin_nav.html" %}
+<table><tr><th>Mã / ngày</th><th>Người đặt</th><th>Giao tới</th><th>Sản phẩm</th><th>Tổng</th><th>Trạng thái</th></tr>
+{% for o in orders %}<tr><td><b>{{ o.code }}</b><br><small>{{ o.created_at }}</small></td>
+<td>{{ o.buyer_name }}<br>{{ o.buyer_phone }}</td>
+<td>{% if o.ship_address %}{{ o.ship_name }} – {{ o.ship_phone }}<br>{{ o.ship_address }}{% else %}<i>chưa nhập</i>{% endif %}</td>
+<td>{% for i in items[o.id] %}{{ i.name }} ×{{ i.qty }}<br>{% endfor %}</td><td>{{ o.total|vnd }}</td>
+<td><form method="post" action="{{ url_for('admin_order_status', oid=o.id) }}"><select name="status" onchange="this.form.submit()">
+{% for k,v in STATUSES.items() %}<option value="{{ k }}" {{ 'selected' if k==o.status }}>{{ v }}</option>{% endfor %}</select></form></td></tr>{% endfor %}</table>{% endblock %}

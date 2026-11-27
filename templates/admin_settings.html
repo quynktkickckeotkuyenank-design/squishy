@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block body %}<h1>Cài đặt</h1>{% include "admin_nav.html" %}
+<form method="post" class="card" style="max-width:480px">
+<label>Tên shop</label><input name="shop_name" value="{{ s.shop_name }}">
+<label>Tỷ giá quy đổi: 1¥ = ... đ (kế hoạch: 4000)</label><input name="cny_rate" type="number" step="0.01" value="{{ s.cny_rate }}">
+<label>Hệ số giá bán % (hiện: 120)</label><input name="markup_percent" type="number" step="0.01" value="{{ s.markup_percent }}">
+<label>Tiền cân mặc định / mỗi sản phẩm (đ)</label><input name="default_surcharge" type="number" value="{{ s.default_surcharge }}">
+<label>Ngưỡng "hàng nặng" (kg)</label><input name="heavy_kg" type="number" step="0.1" value="{{ s.heavy_kg }}">
+<label><input type="checkbox" name="recalc" style="width:auto"> Tính lại giá tất cả sản phẩm theo hệ số mới</label>
+<p><button class="btn">Lưu</button></p></form>{% endblock %}

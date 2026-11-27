@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block body %}
+<div class="two"><div>{% if p.image %}<img class="thumb" src="{{ url_for('uploaded', name=p.image) }}">{% else %}<div class="thumb"></div>{% endif %}</div>
+<div><h1>{{ p.name }}</h1><div class="price" style="font-size:1.6rem">{{ p.price|vnd }}</div>
+{% if p.type=='instock' %}<span class="badge ok">Có sẵn: {{ p.stock }} chiếc</span>{% else %}<span class="badge">Pre-order – hàng về sau khi đặt</span>{% endif %}
+<p>{{ p.description }}</p>
+{% if p.type=='preorder' or p.stock>0 %}
+<form method="post" action="{{ url_for('cart_add') }}"><input type="hidden" name="pid" value="{{ p.id }}">
+<label>Số lượng</label><input type="number" name="qty" value="1" min="1" {% if p.type=='instock' %}max="{{ p.stock }}"{% endif %} style="width:100px">
+<p><button class="btn">Thêm vào giỏ 🛒</button></p></form>{% else %}<p><b>Hết hàng</b></p>{% endif %}</div></div>{% endblock %}

@@ -1,0 +1,29 @@
+:root{--pink:#F6C9D4;--blue:#C9E4F2;--butter:#F7E7A8;--sage:#CFE3C5;--brown:#A98268;--cream:#FFF9F1;--ink:#5a4536}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,Aptos,system-ui,sans-serif;line-height:1.5}
+h1,h2,h3,.logo{font-family:Georgia,"Cormorant Garamond",serif;color:var(--brown)}
+a{color:var(--brown)}
+header{background:#fff;border-bottom:2px dashed var(--pink);padding:12px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.logo{font-size:1.4rem;text-decoration:none;font-weight:bold;margin-right:auto}
+header nav a{text-decoration:none;font-weight:700;margin-left:12px}
+main{max-width:1000px;margin:24px auto;padding:0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.card{background:#fff;border:2px solid var(--pink);border-radius:18px;padding:14px}
+.card img,.thumb{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:var(--blue)}
+.price{font-weight:800;font-size:1.1rem}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.8rem;font-weight:700;background:var(--butter)}
+.badge.ok{background:var(--sage)}
+.btn{display:inline-block;background:var(--pink);color:var(--ink);border:0;border-radius:99px;padding:10px 20px;font-weight:800;cursor:pointer;text-decoration:none;font:inherit;font-weight:800}
+.btn.alt{background:var(--blue)}.btn.small{padding:4px 12px;font-size:.85rem}
+input,select,textarea{width:100%;padding:10px;border:2px solid var(--blue);border-radius:12px;font:inherit;background:#fff}
+label{display:block;margin:10px 0 4px;font-weight:700}
+.flash{background:var(--butter);padding:10px 16px;border-radius:12px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}
+th,td{padding:8px 10px;border-bottom:1px solid var(--blue);text-align:left;vertical-align:top}
+th{background:var(--blue)}
+.alert{background:#fff3cd;border:2px solid var(--butter);border-radius:14px;padding:12px 16px;margin-bottom:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.qrbox{text-align:center}.qrbox img{width:260px;max-width:100%;background:#fff;border:2px solid var(--pink);border-radius:16px;padding:8px}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}.stats .card{flex:1;min-width:140px;text-align:center}
+.bell{background:#e74c3c;color:#fff;border-radius:99px;padding:0 7px;font-size:.75rem}

@@ -1,0 +1,10 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ shop_name }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+<header><a class="logo" href="{{ url_for('index') }}">✦ {{ shop_name }}</a>
+<nav><a href="{{ url_for('index') }}">Sản phẩm</a><a href="{{ url_for('track') }}">Tra đơn</a>
+<a href="{{ url_for('cart') }}">🛒 Giỏ ({{ cart_count }})</a>
+{% if session.admin %}<a href="{{ url_for('admin') }}">Quản trị {% if n_alerts %}<span class="bell">🔔{{ n_alerts }}</span>{% endif %}</a>{% endif %}</nav></header>
+<main>{% for m in get_flashed_messages() %}<div class="flash">{{ m }}</div>{% endfor %}
+{% block body %}{% endblock %}</main></body></html>
